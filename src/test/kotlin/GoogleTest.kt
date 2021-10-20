@@ -7,6 +7,7 @@ import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestInstance
 import org.openqa.selenium.By
+import utils.BaseTest
 
 /*
  * I tried to create a sample Selenide test in Kotlin, but encountered few problems:
@@ -15,11 +16,8 @@ import org.openqa.selenium.By
  * 2. Selenide.getElement(By.name("q")).val("selenide+kotlin"); // val doesn't compile in Kotlin :(
  */
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-class GoogleTest {
+class GoogleTest: BaseTest() {
 
-    @BeforeAll fun setUp() {
-        open("https://google.com/ncr")
-    }
 
     @Test
     fun usingDollarsWithBackticks() {
@@ -40,11 +38,5 @@ class GoogleTest {
         get("#res .g").shouldHave(text("concise ui tests in Java"))
     }
 
-    fun get(selector: String) : SelenideElement {
-        return `$`(selector)
-    }
-    
-    fun all(selector: String) : ElementsCollection {
-        return `$$`(selector)
-    }
+
 }
